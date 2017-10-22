@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!--Made by an engineer for engineers-->
+    <link rel="icon" type="image/png" href="/assets/favicon-32x32.png" sizes="32x32">
+    <link rel="icon" type="image/png" href="/assets/favicon-16x16.png" sizes="16x16">
+    <link rel="stylesheet" href="../css/intlTelInput.css">
+    <link rel="stylesheet" href="../css/verify.css">
+    <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.8/angular.min.js"></script>
+    <style>
+        .container {
+            padding-top: 15%;
+        }
+    </style>
+</head>
+<body style="overflow: hidden;">
+<script>
+  $(function() {
+    // sending message to parent for the success verification
+     setInterval(function() {
+        parent.postMessage("successVerification","*");
+      },1000);
+    });
+</script>
+</body>
+</html>

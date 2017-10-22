@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Start Phone Verification - Super Simple Authy Demo</title>
+    <!--Made by an engineer for engineers-->
+    <link rel="icon" type="image/png" href="/assets/favicon-32x32.png" sizes="32x32">
+    <link rel="icon" type="image/png" href="/assets/favicon-16x16.png" sizes="16x16">
+    <link rel="stylesheet" href="../css/intlTelInput.css">
+    <link rel="stylesheet" href="../css/verify.css">
+    <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.8/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.7/angular-route.min.js"></script>
+    <script src="/app.js"></script>
+    <script src="../js/intlTelInput.js"></script>
+    <style>
+        .container {
+            padding-top: 15%;
+        }
+    </style>
+</head>
+<body ng-app="authyDemo" style="overflow: hidden;">
+
+<div id="phoneVerification"  ng-controller="PhoneVerificationController">
+    <h1>Verify your Phone Number</h1>
+    <p>The quick brown fox jumps over the head of the lazy dog.</p>
+    <div class="form-container" ng-show="view.start">
+      <form>
+        <ul>
+          <li>
+            <span>
+              <label for="country_code">Country Code *</label>
+            </span>
+            <input readonly="true" type="text" name="country_code" id="country_code"
+                     ng-model="setup.country_code">
+          </li>
+          <li>
+            <span>
+              <label for="phone_number">Phone # *</label>
+            </span>
+            <input type="text" name="phone_number" id="phone_number"
+                     ng-model="setup.phone_number">
+          </li>
+        </ul>
+         <input type="submit" value="Request Verification"
+               ng-click="startVerification()">
+      </form>
+    </div>
+    <div class="form-container" ng-hide="view.start">
+        <form role="form">
+            <ul>
+              <li class="token">
+                <span>
+                  <label for="token">Verification Token *</label>
+                </span>
+                 <input type="text" name="token"
+                       id="token"
+                       ng-model="setup.token">
+              </li>
+            </ul>
+            <input type="submit" value="Verify Phone"
+                   ng-click="verifyToken()">
+        </form>
+    </div>
+</div>
+<script>
+  $(function() {
+      $('#country_code').intlTelInput({onlyCountries:["ae"],autoHideDialCode:false});
+      var mobNumber = getUrlParameter('iMobVerify');
+      $('#phone_number').val(mobNumber).change();
+      //getting the mobile number to be veify
+      function getUrlParameter(sParam) {
+        var sPageURL = decodeURIComponent(window.location.search.substring(1)),
+            sURLVariables = sPageURL.split('&'),
+            sParameterName,
+            i;
+
+        for (i = 0; i < sURLVariables.length; i++) {
+            sParameterName = sURLVariables[i].split('=');
+
+            if (sParameterName[0] === sParam) {
+                return sParameterName[1] === undefined ? true : sParameterName[1];
+            }
+        }
+      };
+    });
+</script>
+</body>
+</html>
